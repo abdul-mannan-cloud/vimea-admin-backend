@@ -39,5 +39,21 @@ const addProduct = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
   };
-  module.exports = { addProduct };
+
+
+  const getAllProducts = async (req, res) => {
+    try {
+      const products = await Product.find(); 
+  
+      res.status(200).json({
+        message: "Products retrieved successfully",
+        products: products,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+
+  module.exports = { addProduct, getAllProducts };
   
