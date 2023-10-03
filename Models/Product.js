@@ -4,7 +4,6 @@ const ProductSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   name: {
     type: String,
-    unique: true,
     required: true
   },
   description: {
@@ -25,7 +24,7 @@ const ProductSchema = new mongoose.Schema({
     required: true
   },
   size: {
-    type: String,
+    type: [String],
     required: true
   },
   type: {

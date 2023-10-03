@@ -15,50 +15,49 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 app.use(express.static('public/assets'))
-
-
 app.use(bodyParser.json())
 
 
+// const Product = require('./models/Product');
 
 
+// app.post('/addproduct', upload.array('images'), (req, res) => {
+//   try {
+//     const filenames = req.files.map(file => file.filename);
+//     const { productName, price, quantity, type, size1, size2, size3, description } = req.body;
 
+//     const product = new Product({
+//       _id: new mongoose.Types.ObjectId(),
+//       name: productName,
+//       description: description,
+//       price: price,
+//       mainImage: filenames[0],
+//       addonImages: filenames.slice(1),
+//       quantity: quantity,
+//       size: [size1, size2, size3],
+//       type: type,
+//     });
 
+//     product.save()
+//     .then((result) => {
+//       console.log(result);
+//       res.status(201).json({
+//         message: "Product Created Successfully",
+//         createdProduct: result,
+//       });
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.status(500).json({
+//         error: err,
+//       });
+//     });
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/assets'); 
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + '.' + file.originalname.split('.').pop());
-  },
-});
-
-const upload = multer({ storage });
-
-
-app.post('/upload', upload.single('image'), (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ message: 'No file uploaded' });
-    }
-
-    const fileAddress = req.file.path;
-    res.json({ address: fileAddress });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-
-
-
-
-
-
-
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// });
 
 
 
@@ -78,7 +77,7 @@ const productRoutes = require('./Routes/Product');
 app.use('/products', productRoutes);
 
 
-const DB = "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/admin"
+const DB = "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/"
 mongoose.connect(DB,{
     useNewUrlParser:true,
     useUnifiedTopology:true
