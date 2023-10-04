@@ -55,5 +55,13 @@ const addProduct = async (req, res) => {
     }
   };
 
-  module.exports = { addProduct, getAllProducts };
+
+  const editProduct = async (req, res) => {
+
+console.log("hello im the req.body", req.body);
+
+  }
+
+
+  module.exports = { addProduct, getAllProducts, editProduct };
   
