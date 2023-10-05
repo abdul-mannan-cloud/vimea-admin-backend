@@ -57,11 +57,34 @@ const addProduct = async (req, res) => {
 
 
   const editProduct = async (req, res) => {
-
-console.log("hello im the req.body", req.body);
+    // const filenames = req.files.map(file => file.filename);
+    // const { productName, price, quantity, type, size1, size2, size3, description } = req.body;
+    console.log(req.body)
 
   }
 
 
-  module.exports = { addProduct, getAllProducts, editProduct };
+  
+const deleteProduct = async (req, res) => {
+  const productId = req.params.productId;
+
+  try {
+    const deletedProduct = await Product.findByIdAndRemove(productId);
+
+    if (!deletedProduct) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    res.status(200).json({
+      message: 'Product deleted successfully',
+      deletedProduct,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+  module.exports = { addProduct, getAllProducts, editProduct, deleteProduct };
   
