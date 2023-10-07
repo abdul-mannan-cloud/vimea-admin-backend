@@ -71,8 +71,10 @@ app.use(bodyParser.json())
   })
 
 
-const productRoutes = require('./Routes/Product');
-app.use('/products', productRoutes);
+  const productRoutes = require('./Routes/Product');
+  app.use('/products', productRoutes);
+  const blogRoutes = require('./Routes/Blog');
+  app.use('/blogs', blogRoutes);
 
 
 const DB = "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/"
