@@ -16,6 +16,53 @@ app.use(express.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 
+
+const AWS = require("aws-sdk");
+const fs = require("fs");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+console.log(process.env.DO_SPACES_KEY);
+
+const spacesEndpoint = new AWS.Endpoint(process.env.DO_SPACES_ENDPOINT);
+const s3 = new AWS.S3({
+  endpoint: spacesEndpoint,
+  accessKeyId: process.env.DO_SPACES_KEY,
+  secretAccessKey: process.env.DO_SPACES_SECRET
+});
+
+s3.listBuckets({}, function(err, data) {
+  if (err) {
+    console.log("Error", err);
+  } else {
+    console.log("Success", data.Buckets);
+  }
+});
+
+
+
+
+
+  const port = process.env.PORT || 3001;
+  app.listen(port, ()=>{
+      console.log(`App Listening at Port ${port}`)
+  })
+
+
+  const productRoutes = require('./Routes/Product');
+  app.use('/products', productRoutes);
+  const blogRoutes = require('./Routes/Blog');
+  app.use('/blogs', blogRoutes);
+
+
+const DB = "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/"
+mongoose.connect(DB,{
+    useNewUrlParser:true,
+    useUnifiedTopology:true
+}).then(()=> console.log("Database connected"))
+.catch((error)=> console.log(error.message));
+
 // const Product = require('./models/Product');
 
 
@@ -62,24 +109,3 @@ app.use(bodyParser.json())
 
 
 
-
-
-
-  const port = process.env.PORT || 3001;
-  app.listen(port, ()=>{
-      console.log(`App Listening at Port ${port}`)
-  })
-
-
-  const productRoutes = require('./Routes/Product');
-  app.use('/products', productRoutes);
-  const blogRoutes = require('./Routes/Blog');
-  app.use('/blogs', blogRoutes);
-
-
-const DB = "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/"
-mongoose.connect(DB,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true
-}).then(()=> console.log("Database connected"))
-.catch((error)=> console.log(error.message));
