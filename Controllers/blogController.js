@@ -3,16 +3,15 @@ const Blog = require('../models/Blog');
 
 const addBlog = async (req, res) => {
   try {
-    const { blogTitle, phoneNumber, toSatisfy } = req.body;
-    const mainImage = req.files[0].filename;
-    const addonImages = req.files.slice(1).map(file => file.filename);
+    const { blogTitle, phoneNumber, toSatisfy,imagenames } = req.body;
+    console.log(req.body);
 
     const blog = new Blog({
       _id: new mongoose.Types.ObjectId(),
       blogTitle,
       phoneNumber,
-      mainImage,
-      addonImages,
+      mainImage: imagenames[0],
+      addonImages: imagenames.slice(1),
       toSatisfy,
     });
 
@@ -31,9 +30,9 @@ const addBlog = async (req, res) => {
 
 const editBlog = async (req, res) => {
     try {
-      const { blogTitle, phoneNumber, toSatisfy } = req.body;
-      const mainImage = req.files[0].filename;
-      const addonImages = req.files.slice(1).map(file => file.filename);
+      const { blogTitle, phoneNumber, toSatisfy,imagenames } = req.body;
+      // const mainImage = req.files[0].filename;
+      // const addonImages = req.files.slice(1).map(file => file.filename);
   
       const { blogId } = req.params;
       const updatedBlog = await Blog.findByIdAndUpdate(
@@ -42,8 +41,8 @@ const editBlog = async (req, res) => {
           $set: {
             blogTitle,
             phoneNumber,
-            mainImage,
-            addonImages,
+            mainImage: imagenames[0],
+            addonImages: imagenames.slice(1),
             toSatisfy,
           },
         },
