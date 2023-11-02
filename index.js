@@ -54,6 +54,8 @@ s3.listBuckets({}, function(err, data) {
   app.use('/products', productRoutes);
   const blogRoutes = require('./Routes/Blog');
   app.use('/blogs', blogRoutes);
+  const clientRoutes = require('./Routes/Client');
+  app.use('/client', clientRoutes);
 
 
 const DB = "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/"
