@@ -55,6 +55,9 @@ s3.listBuckets({}, function(err, data) {
   app.use('/client', clientRoutes);
   const employeeRoutes = require('./Routes/Employee');
   app.use('/employee', employeeRoutes);
+  const feedbackRoutes = require('./Routes/Routes');
+  app.use('/feedback', feedbackRoutes);
+
 
 
 const DB = "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/"
@@ -63,6 +66,17 @@ mongoose.connect(DB,{
     useUnifiedTopology:true
 }).then(()=> console.log("Database connected"))
 .catch((error)=> console.log(error.message));
+
+// const secondDb =  "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/"
+// mongoose.connect(secondDb, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// })
+// .then(() => console.log("Second Database connected"))
+// .catch((error) => console.log(error.message));
+
+
+
 
 // const Product = require('./models/Product');
 
