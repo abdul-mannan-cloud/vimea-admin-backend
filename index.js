@@ -41,9 +41,6 @@ s3.listBuckets({}, function(err, data) {
 });
 
 
-
-
-
   const port = process.env.PORT || 3001;
   app.listen(port, ()=>{
       console.log(`App Listening at Port ${port}`)
@@ -56,6 +53,8 @@ s3.listBuckets({}, function(err, data) {
   app.use('/blogs', blogRoutes);
   const clientRoutes = require('./Routes/Client');
   app.use('/client', clientRoutes);
+  const employeeRoutes = require('./Routes/Employee');
+  app.use('/employee', employeeRoutes);
 
 
 const DB = "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/"
