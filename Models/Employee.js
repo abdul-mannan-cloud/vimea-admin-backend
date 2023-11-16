@@ -13,7 +13,10 @@ const employeeSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: true
-  }
+  },
+  password:{
+    type: String,
+  },
 });
 
 const Employee = mongoose.model('Employee', employeeSchema);

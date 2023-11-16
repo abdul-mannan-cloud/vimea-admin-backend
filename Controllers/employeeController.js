@@ -1,4 +1,5 @@
 const Employee = require('../models/Employee');
+const jwt = require('jsonwebtoken');
 
 const addEmployee = async (req, res) => {
     try {
@@ -40,4 +41,49 @@ const deleteEmployee = async (req, res) => {
     }
 };
 
-module.exports = { addEmployee, editEmployee, getAllEmployees, deleteEmployee };
+const signin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const employee = await Employee.findOne({ email });
+        if (!employee) {
+            res.status(404).json({ message: 'Employee not found' });
+        } else {
+            if (employee.password === password) {
+                //jwt
+                const payload = {
+                    email: employee.email,
+                };
+                jwt.sign('secretkey', payload, (err, token) => {
+                    if (err) {
+                        res.status(500).json({ message: err.message });
+                    } else {
+                        res.status(200).json({ token });
+                    }
+                })
+            } else {
+                res.status(401).json({ message: 'Invalid credentials' });
+            }
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+const checkSignIn = (req, res, next) => {
+    const { authorization } = req.headers;
+    if (authorization) {
+        const token = authorization.split(' ')[1];
+        jwt.verify(token, 'secretkey', (err, payload) => {
+            if (err) {
+                res.status(401).json({ message: 'Invalid token' });
+            } else {
+                req.email = payload.email;
+                next();
+            }
+        })
+    } else {
+        res.status(401).json({ message: 'You are not authorized' });
+    }
+}
+
+module.exports = { addEmployee, editEmployee, getAllEmployees, deleteEmployee , signin};
