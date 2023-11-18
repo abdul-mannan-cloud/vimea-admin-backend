@@ -57,6 +57,8 @@ s3.listBuckets({}, function(err, data) {
   app.use('/employee', employeeRoutes);
   const feedbackRoutes = require('./Routes/Routes');
   app.use('/feedback', feedbackRoutes);
+  const orderRoutes = require('./Routes/Order');
+  app.use('/order', orderRoutes);
 
 
 
