@@ -24,3 +24,13 @@ exports.getOrderById = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+exports.getOrdersToday = async (req, res) => {
+    try {
+        const orders = await Order.find({ createdAt: { $gte: new Date().setHours(0, 0, 0, 0) } });
+        res.json(orders);
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
