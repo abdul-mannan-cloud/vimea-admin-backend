@@ -7,5 +7,6 @@ router.post('/addappointment', addAppointment);
 router.post('/editappointment/:id', updateAppointment);
 router.get('/getallappointments', getAppointments);
 router.delete('/deleteappointment/:appointmentId', deleteAppointment);
+router.get('/gettodayappointments', getAppointments);
 
 module.exports = router;
