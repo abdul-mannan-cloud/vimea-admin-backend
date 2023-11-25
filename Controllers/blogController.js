@@ -12,7 +12,7 @@ const addBlog = async (req, res) => {
       phoneNumber,
       mainImage: imagenames[0],
       addonImages: imagenames.slice(1),
-      toSatisfy,
+      description,
     });
 
     const savedBlog = await blog.save();
@@ -30,7 +30,7 @@ const addBlog = async (req, res) => {
 
 const editBlog = async (req, res) => {
     try {
-      const { blogTitle, phoneNumber, toSatisfy,imagenames } = req.body;
+      const { blogTitle, phoneNumber, imagenames, description  } = req.body;
       // const mainImage = req.files[0].filename;
       // const addonImages = req.files.slice(1).map(file => file.filename);
   
@@ -43,7 +43,7 @@ const editBlog = async (req, res) => {
             phoneNumber,
             mainImage: imagenames[0],
             addonImages: imagenames.slice(1),
-            toSatisfy,
+            description,
           },
         },
         { new: true } 

@@ -15,10 +15,14 @@ const BlogSchema = new mongoose.Schema({
     required: true
   },
   addonImages: [String],
-    toSatisfy: {
-        type: String,
-        required: true
-    }
+  description: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model('Blog', BlogSchema);
