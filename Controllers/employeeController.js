@@ -55,15 +55,15 @@ const signin = async (req, res) => {
             res.status(404).json({ message: 'Employee not found' });
         } else {
             if (employee.password === password) {
-                //jwt
                 const payload = {
                     email: employee.email,
+                    role: employee.role
                 };
                 jwt.sign('secretkey', payload, (err, token) => {
                     if (err) {
                         res.status(500).json({ message: err.message });
                     } else {
-                        res.status(200).json({ token });
+                        res.status(200).json({ email:employee.email,name:employee.name,role:employee.role,token:token });
                     }
                 })
             } else {

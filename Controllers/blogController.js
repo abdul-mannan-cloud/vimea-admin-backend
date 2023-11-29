@@ -3,13 +3,11 @@ const Blog = require('../Models/Blog');
 
 const addBlog = async (req, res) => {
   try {
-    const { blogTitle, phoneNumber, toSatisfy,imagenames } = req.body;
+    const { blogTitle,imagenames,description } = req.body;
     console.log(req.body);
 
     const blog = new Blog({
-      _id: new mongoose.Types.ObjectId(),
       blogTitle,
-      phoneNumber,
       mainImage: imagenames[0],
       addonImages: imagenames.slice(1),
       description,
