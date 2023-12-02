@@ -5,13 +5,7 @@ const BlogSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  phoneNumber: {
-    type: String,
-  },
-  mainImage: {
-    type: String,
-  },
-  addonImages: [String],
+  images: [String],
   description: {
     type: String,
     required: true

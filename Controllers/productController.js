@@ -57,36 +57,22 @@ const addProduct = async (req, res) => {
 
   const editProduct = async (req, res) => {
     try {
-      const { id, productName, price, quantity, type, size1, size2, size3, description, imagenames } = req.body;
-      const product = await Product.findById(id);  
+      const ep = req.body;
+      const product = await Product.findByIdAndUpdate(ep.id,ep, { new: true });
       if (!product) {
         return res.status(404).json({ message: 'Product not found' });
       }
-  
-      product.name = productName || product.name;
-      product.description = description || product.description;
-      product.price = price || product.price;
-      product.mainImage = imagenames ? imagenames[0] : product.mainImage;
-      product.addonImages = imagenames ? imagenames.slice(1) : product.addonImages;
-      product.quantity = quantity || product.quantity;
-      product.size = [size1, size2, size3] || product.size;
-      product.type = type || product.type;
-  
-      const updatedProduct = await product.save();
-  
+
       res.status(200).json({
         message: 'Product updated successfully',
-        updatedProduct: updatedProduct,
+        updatedProduct: product,
       });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal server error' });
     }
   };
-  
 
-
-  
 const deleteProduct = async (req, res) => {
   const productId = req.params.productId;
 

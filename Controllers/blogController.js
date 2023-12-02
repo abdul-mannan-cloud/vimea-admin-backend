@@ -8,8 +8,7 @@ const addBlog = async (req, res) => {
 
     const blog = new Blog({
       blogTitle,
-      mainImage: imagenames[0],
-      addonImages: imagenames.slice(1),
+      images: imagenames,
       description,
     });
 
@@ -28,21 +27,16 @@ const addBlog = async (req, res) => {
 
 const editBlog = async (req, res) => {
     try {
-      const { blogTitle, phoneNumber, imagenames, description  } = req.body;
+      const { blogTitle, phoneNumber, imagenames, description ,blogId } = req.body;
       // const mainImage = req.files[0].filename;
       // const addonImages = req.files.slice(1).map(file => file.filename);
-  
-      const { blogId } = req.params;
+      console.log(req.body)
+
       const updatedBlog = await Blog.findByIdAndUpdate(
-        blogId,
-        {
-          $set: {
+        blogId,{
             blogTitle,
-            phoneNumber,
-            mainImage: imagenames[0],
-            addonImages: imagenames.slice(1),
+            images: imagenames,
             description,
-          },
         },
         { new: true } 
       );

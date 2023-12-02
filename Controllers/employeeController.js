@@ -2,8 +2,8 @@ const Employee = require('../Models/Employee');
 
 const addEmployee = async (req, res) => {
     try {
-        const { name, email, phone } = req.body;
-        const employee = new Employee({ name, email, phone });
+        const { name, email, phone,password } = req.body;
+        const employee = new Employee({ name, email, phone,password,role:"employee" });
         const savedEmployee = await employee.save();
         res.status(200).json(savedEmployee);
     } catch (error) {
@@ -14,11 +14,11 @@ const addEmployee = async (req, res) => {
 const editEmployee = async (req, res) => {
     try {
         const { employeeId } = req.params;
-        const { name, email, phone } = req.body;
+        const { name, email, phone,password } = req.body;
 
         const updatedEmployee = await Employee.findByIdAndUpdate(
             employeeId,
-            { name, email, phone },
+            { name, email, phone,password },
             { new: true } // This option returns the updated document
         );
 
