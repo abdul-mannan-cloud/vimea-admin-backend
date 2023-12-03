@@ -40,7 +40,7 @@ const editBlog = async (req, res) => {
         },
         { new: true } 
       );
-  
+
       res.status(200).json({
         message: 'Blog post updated successfully',
         blog: updatedBlog,

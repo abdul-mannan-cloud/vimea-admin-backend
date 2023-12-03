@@ -1,29 +1,28 @@
-const Users = require('../Models/User');
+const User = require('../Models/User');
 
 const addClient = async (req, res) => {
-    // try {
-    //     const { clientName, mobileNumber, sales, userName, password } = req.body;
-    //     const client = new User({ clientName, mobileNumber, sales, userName, password });
-    //     const savedClient = await client.save();
-    //     res.status(200).json(savedClient);
-    // } catch (error) {
-    //     res.status(500).json({ message: error.message });
-    // }
+    try {
+        const client = new User(req.body);
+        const savedClient = await client.save();
+        res.status(200).json(savedClient);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
 const editClient = async (req, res) => {
-    // try {
-    //     const { id, clientName, mobileNumber, sales, userName, password } = req.body;
-    //     const updatedClient = await Client.findByIdAndUpdate(id, { clientName, mobileNumber, sales, userName, password }, { new: true });
-    //     res.status(200).json(updatedClient);
-    // } catch (error) {
-    //     res.status(500).json({ message: error.message });
-    // }
+    try {
+        const id = req.body._id;
+        const updatedClient = await User.findByIdAndUpdate(id, req.body, { new: true });
+        res.status(200).json(updatedClient);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
 const getAllClients = async (req, res) => {
     try {
-        const clients = await Users.find();
+        const clients = await User.find();
         res.status(200).json(clients);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -31,13 +30,24 @@ const getAllClients = async (req, res) => {
 };
 
 const deleteClient = async (req, res) => {
-    // try {
-    //     const { id } = req.params;
-    //     const deletedClient = await Users.findByIdAndRemove(id);
-    //     res.status(200).json(deletedClient);
-    // } catch (error) {
-    //     res.status(500).json({ message: error.message });
-    // }
+    try {
+        const { id } = req.params;
+        console.log(id)
+        const deletedClient = await User.findByIdAndRemove(id);
+        res.status(200).json(deletedClient);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
-module.exports = { addClient, editClient, getAllClients, deleteClient };
+const getClient =  async (req, res) => {
+    try {
+        const { id } = req.params;
+        const client = await User.findById(id);
+        res.status(200).json(client);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+module.exports = { addClient, editClient, getAllClients, deleteClient,getClient };

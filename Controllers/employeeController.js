@@ -1,4 +1,5 @@
 const Employee = require('../Models/Employee');
+const {sign} = require("jsonwebtoken");
 
 const addEmployee = async (req, res) => {
     try {
@@ -59,7 +60,7 @@ const signin = async (req, res) => {
                     email: employee.email,
                     role: employee.role
                 };
-                jwt.sign('secretkey', payload, (err, token) => {
+                sign( payload,process.env.REACT_SECRET, (err, token) => {
                     if (err) {
                         res.status(500).json({ message: err.message });
                     } else {
