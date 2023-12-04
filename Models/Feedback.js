@@ -32,7 +32,11 @@ const feedbackSchema = new mongoose.Schema({
     },
     recommendation: {
         type: Number,
-    }
+    },
+    approved: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const Feedback = mongoose.model('Feedback', feedbackSchema);

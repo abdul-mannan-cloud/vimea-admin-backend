@@ -1,8 +1,10 @@
 const User = require('../Models/User');
+const Cart = require("../Models/cart");
 
 const addClient = async (req, res) => {
     try {
-        const client = new User(req.body);
+        const cart = await Cart.create({products:[]})
+        const client = new User({...req.body, cart:cart._id});
         const savedClient = await client.save();
         res.status(200).json(savedClient);
     } catch (error) {
