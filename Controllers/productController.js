@@ -57,7 +57,10 @@ const addProduct = async (req, res) => {
 
   const editProduct = async (req, res) => {
     try {
-      const ep = req.body;
+      let ep = req.body;
+      console.log(ep)
+      ep.addonImages = ep.addonImages.filter((image) => typeof image === 'string');
+      console.log(ep)
       const product = await Product.findByIdAndUpdate(ep.id,ep, { new: true });
       if (!product) {
         return res.status(404).json({ message: 'Product not found' });
