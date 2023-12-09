@@ -4,7 +4,7 @@ const Product = require('../Models/Product');
 
 const addProduct = async (req, res) => {
   try {
-    const { productName, price, quantity, type, size1, size2, size3, description, imagenames } = req.body;
+    const { productName, price, quantity, type, size, description, imagenames,brand } = req.body;
 
     const product = new Product({
       _id: new mongoose.Types.ObjectId(),
@@ -14,8 +14,9 @@ const addProduct = async (req, res) => {
       mainImage: imagenames[0],
       addonImages: imagenames.slice(1),
       quantity: quantity,
-      size: [size1, size2, size3],
+      size: size,
       type: type,
+      brand: brand,
     });
 
     product.save()
@@ -58,9 +59,7 @@ const addProduct = async (req, res) => {
   const editProduct = async (req, res) => {
     try {
       let ep = req.body;
-      console.log(ep)
       ep.addonImages = ep.addonImages.filter((image) => typeof image === 'string');
-      console.log(ep)
       const product = await Product.findByIdAndUpdate(ep.id,ep, { new: true });
       if (!product) {
         return res.status(404).json({ message: 'Product not found' });

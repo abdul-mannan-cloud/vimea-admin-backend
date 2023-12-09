@@ -23,13 +23,17 @@ const ProductSchema = new mongoose.Schema({
     required: true
   },
   size: {
-    type: String,
+    type: Number,
     required: true
   },
   type: {
     type: String,
     required: false
-  }
+  },
+  brand: {
+    type: String,
+    required: false
+  },
 });
 
 module.exports = mongoose.model('Product', ProductSchema);
