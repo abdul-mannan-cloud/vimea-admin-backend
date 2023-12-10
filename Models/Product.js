@@ -24,7 +24,6 @@ const ProductSchema = new mongoose.Schema({
   },
   size: {
     type: Number,
-    required: true
   },
   type: {
     type: String,
