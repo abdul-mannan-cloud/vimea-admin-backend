@@ -34,6 +34,10 @@ const AppointmentSchema = new mongoose.Schema({
     employee:{
         type: String,
     },
+    approved:{
+        type: Boolean,
+        default: false,
+    },
 })
 
 module.exports = mongoose.model('Appointment', AppointmentSchema)
