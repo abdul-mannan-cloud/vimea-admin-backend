@@ -13,7 +13,10 @@ const addAppointment = async (req, res) => {
 }
 
 const deleteAppointment = async (req, res) => {
+    console.log("GOing to delete this appointment");
+    
     const {id} = req.params
+    console.log(id);
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No Appointment with that id')
     await Appointment.findByIdAndRemove(id)
     res.json({message: 'Appointment deleted successfully'})

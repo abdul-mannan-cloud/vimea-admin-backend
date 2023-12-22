@@ -38,6 +38,10 @@ const AppointmentSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    status: {
+        type: String,
+        default: true,
+    }
 })
 
 module.exports = mongoose.model('Appointment', AppointmentSchema)
