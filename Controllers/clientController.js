@@ -1,4 +1,5 @@
 const User = require('../Models/User');
+const Children = require('../Models/Children');
 const Cart = require("../Models/cart");
 
 const addClient = async (req, res) => {
@@ -52,4 +53,15 @@ const getClient =  async (req, res) => {
     }
 }
 
-module.exports = { addClient, editClient, getAllClients, deleteClient,getClient };
+
+const getAllChildren = async (req, res) => {
+    try {
+        const childrens = await Children.find();
+        console.log(childrens)
+        res.status(200).json(childrens);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = { addClient, editClient, getAllClients, deleteClient,getClient, getAllChildren };
