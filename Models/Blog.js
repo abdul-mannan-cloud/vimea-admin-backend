@@ -5,8 +5,16 @@ const BlogSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  blogTitleENG: {
+    type: String,
+    required: true
+  },
   images: [String],
   description: {
+    type: String,
+    required: true
+  },
+  descriptionENG: {
     type: String,
     required: true
   },

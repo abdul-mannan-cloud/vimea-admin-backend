@@ -4,18 +4,21 @@ const Product = require('../Models/Product');
 
 const addProduct = async (req, res) => {
   try {
-    const { productName, price, quantity, type, size, description, imagenames,brand } = req.body;
+    const { productName, price, quantity, type, size, description, imagenames,brand, productNameENG, typeENG, descriptionENG } = req.body;
 
     const product = new Product({
       _id: new mongoose.Types.ObjectId(),
       name: productName,
       description: description,
+      nameENG: productNameENG,
+      descriptionENG: descriptionENG,
       price: price,
       mainImage: imagenames[0],
       addonImages: imagenames.slice(1),
       quantity: quantity,
       size: size,
       type: type,
+      typeENG: typeENG,
       brand: brand,
     });
 

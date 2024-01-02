@@ -3,13 +3,16 @@ const Blog = require('../Models/Blog');
 
 const addBlog = async (req, res) => {
   try {
-    const { blogTitle,imagenames,description } = req.body;
+    const { blogTitle,imagenames,description, blogTitleENG, descriptionENG } = req.body;
     console.log(req.body);
 
     const blog = new Blog({
       blogTitle,
+      blogTitleENG,
       images: imagenames,
       description,
+      descriptionENG,
+
     });
 
     const savedBlog = await blog.save();
@@ -27,7 +30,7 @@ const addBlog = async (req, res) => {
 
 const editBlog = async (req, res) => {
     try {
-      const { blogTitle, phoneNumber, imagenames, description ,blogId } = req.body;
+      const { blogTitle, imagenames, description ,blogId, blogTitleENG, descriptionENG } = req.body;
       // const mainImage = req.files[0].filename;
       // const addonImages = req.files.slice(1).map(file => file.filename);
       console.log(req.body)
@@ -35,8 +38,10 @@ const editBlog = async (req, res) => {
       const updatedBlog = await Blog.findByIdAndUpdate(
         blogId,{
             blogTitle,
+            blogTitleENG,
             images: imagenames,
             description,
+            descriptionENG,
         },
         { new: true } 
       );
