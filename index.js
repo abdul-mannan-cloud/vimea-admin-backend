@@ -62,8 +62,7 @@ app.use('/appointment', appointmentRoutes);
 const serviceRoutes = require('./Routes/Service');
 app.use('/service', serviceRoutes);
 
-
-const DB = "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/"
+const DB = "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/vimea?retryWrites=true&w=majority"
 mongoose.connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true
