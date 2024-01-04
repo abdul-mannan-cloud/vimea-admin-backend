@@ -46,8 +46,8 @@ const addProduct = async (req, res) => {
 
   const getAllProducts = async (req, res) => {
     try {
-      const products = await Product.find(); 
-  
+      const products = await Product.find();
+
       res.status(200).json({
         message: "Products retrieved successfully",
         products: products,
@@ -63,7 +63,7 @@ const addProduct = async (req, res) => {
     try {
       let ep = req.body;
       ep.addonImages = ep.addonImages.filter((image) => typeof image === 'string');
-      const product = await Product.findByIdAndUpdate(ep.id,ep, { new: true });
+      const product = await Product.findByIdAndUpdate(ep.id, {...ep,nameEng:ep.productNameENG}, { new: true });
       if (!product) {
         return res.status(404).json({ message: 'Product not found' });
       }
@@ -100,4 +100,3 @@ const deleteProduct = async (req, res) => {
 
 
   module.exports = { addProduct, getAllProducts, editProduct, deleteProduct };
-  

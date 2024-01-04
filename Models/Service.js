@@ -17,6 +17,14 @@ const serviceSchema = new mongoose.Schema({
         type: Number,
         required: false
     },
+    onlyParent: {
+        type: Boolean,
+        required: false
+    },
+    displayGroup: {
+        type: String,
+        required: false
+    },
 });
 
 module.exports = mongoose.model('Service', serviceSchema);

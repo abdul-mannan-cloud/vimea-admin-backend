@@ -14,7 +14,7 @@ const addAppointment = async (req, res) => {
 
 const deleteAppointment = async (req, res) => {
     console.log("GOing to delete this appointment");
-    
+
     const {id} = req.params
     console.log(id);
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No Appointment with that id')
@@ -30,6 +30,7 @@ const getAppointments = async (req, res) => {
 const updateAppointment = async (req, res) => {
     const {id} = req.params
     const appointment = req.body
+    console.log(appointment)
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No Appointment with that id')
     await Appointment.findByIdAndUpdate(id, appointment, {new: true})
     res.json({message: 'Appointment updated successfully'})

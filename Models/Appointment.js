@@ -38,9 +38,9 @@ const AppointmentSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    status: {
-        type: String,
-        default: true,
+    notShow: {
+        type: Boolean,
+        default: false,
     }
 })
 
