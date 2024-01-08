@@ -47,4 +47,14 @@ const deleteService = async (req, res) => {
     }
 }
 
-module.exports = { addService, getAllServices, editService, deleteService };
+const getService = async (req, res) => {
+    try {
+        const { serviceId } = req.params;
+        const service = await Service.findById(serviceId);
+        res.status(200).json(service);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+module.exports = { addService, getAllServices, editService,getService, deleteService };
