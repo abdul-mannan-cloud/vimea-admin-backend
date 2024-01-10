@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 const AppointmentSchema = new mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
     service: {
         type: String,
     },
@@ -16,7 +15,6 @@ const AppointmentSchema = new mongoose.Schema({
     },
     duration: {
         type: Number,
-        required: true
     },
     category: {
         type: String,
