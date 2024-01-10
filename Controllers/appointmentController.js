@@ -8,6 +8,7 @@ const addAppointment = async (req, res) => {
         await newAppointment.save()
         res.status(201).json(newAppointment)
     } catch (error) {
+        console.log(error)
         res.status(409).json({message: error.message})
     }
 }
