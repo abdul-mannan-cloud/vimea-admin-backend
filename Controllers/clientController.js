@@ -53,6 +53,15 @@ const getClient =  async (req, res) => {
     }
 }
 
+const getChild =  async (req, res) => {
+    try {
+        const { id } = req.params;
+        const child = await Children.findById(id);
+        res.status(200).json(child);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
 
 const getAllChildren = async (req, res) => {
     try {
@@ -64,4 +73,4 @@ const getAllChildren = async (req, res) => {
     }
 };
 
-module.exports = { addClient, editClient, getAllClients, deleteClient,getClient, getAllChildren };
+module.exports = { addClient, editClient, getAllClients, deleteClient,getClient, getAllChildren,getChild };
