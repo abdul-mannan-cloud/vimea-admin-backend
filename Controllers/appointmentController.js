@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const Appointment = require('../Models/Appointment')
+const nodeMailer = require("nodemailer");
 const addAppointment = async (req, res) => {
     const appointment = req.body
     const newAppointment = new Appointment(appointment)
@@ -116,13 +117,19 @@ const addAppointment = async (req, res) => {
 </html>
             `
 
-        const transporter = nodeMailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.PUBLIC_EMAIL,
-                pass: process.env.PUBLIC_EMAIL_PASSWORD
-            }
-        });
+        let transporter;
+        try {
+            transporter = nodeMailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.PUBLIC_EMAIL,
+                    pass: process.env.PUBLIC_EMAIL_PASSWORD
+                }
+            });
+        }catch (e) {
+            console.log(e)
+            res.status(500).json({error: e});
+        }
 
         const mailOptions = {
             from: process.env.PUBLIC_EMAIL,
