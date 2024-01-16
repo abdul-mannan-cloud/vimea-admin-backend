@@ -5,6 +5,37 @@ const nodeMailer = require("nodemailer");
 const addAppointment = async (req, res) => {
     const appointment = req.body
     const newAppointment = new Appointment(appointment)
+    if(appointment.showHistory){
+        const user = await User.findOne({email: appointment.parent.email})
+        if(user) {
+            user.appointments.push({
+                appointmentId: newAppointment._id,
+                date: newAppointment.date,
+                time: newAppointment.time,
+                duration: newAppointment.duration,
+                category: newAppointment.category,
+                serviceType: newAppointment.serviceType,
+                parent:{
+                    firstName: newAppointment.parent.firstName,
+                    lastName: newAppointment.parent.lastName,
+                    contactNumber: newAppointment.parent.contactNumber,
+                    email: newAppointment.parent.email,
+                },
+                child: {
+                    firstName: newAppointment.child.firstName,
+                    lastName: newAppointment.child.lastName,
+                    dateOfBirth: newAppointment.child.dateOfBirth,
+                    id: newAppointment.child.id
+                }
+            })
+            await user.save()
+        }
+        const child = await Children.findById(appointment.child.id)
+        if(child) {
+            child.appointments = [...child.appointments, newAppointment._id]
+            await child.save()
+        }
+    }
     try {
         await newAppointment.save()
 
