@@ -3,38 +3,59 @@ const mongoose = require('mongoose')
 const AppointmentSchema = new mongoose.Schema({
     service: {
         type: String,
+        required: true,
     },
     price: {
         type: Number,
     },
     date: {
         type: Date,
+        required: true,
     },
     time: {
         type: String,
+        required: true,
     },
     duration: {
         type: Number,
     },
     category: {
         type: String,
-        required: true,
     },
     serviceType: {
         type: String,
     },
-    parent:{
-        type: Object,
-    },
-    child:{
-        type: Object,
-    },
-    employee:{
-        type: String,
-    },
-    approved:{
+    approved: {
         type: Boolean,
         default: false,
+    },
+    parent: {
+        firstName: {
+            type: String,
+            required: true,
+        },
+        lastName: {
+            type: String,
+            required: true,
+        },
+        contactNumber: {
+            type: String,
+        },
+        email: {
+            type: String,
+            required: true,
+        },
+    },
+    child: {
+        firstName: {
+            type: String,
+        },
+        lastName: {
+            type: String,
+        },
+        dateOfBirth: {
+            type: String,
+        },
     },
     notShow: {
         type: Boolean,

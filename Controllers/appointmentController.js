@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const Appointment = require('../Models/Appointment')
 const nodeMailer = require("nodemailer");
+const User = require("../Models/User");
+const Children = require("../Models/Children");
 const addAppointment = async (req, res) => {
     const appointment = req.body
     const newAppointment = new Appointment(appointment)
@@ -13,6 +15,7 @@ const addAppointment = async (req, res) => {
                 date: newAppointment.date,
                 time: newAppointment.time,
                 duration: newAppointment.duration,
+                service: newAppointment.service,
                 category: newAppointment.category,
                 serviceType: newAppointment.serviceType,
                 parent:{
