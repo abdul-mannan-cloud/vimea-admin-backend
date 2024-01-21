@@ -25,6 +25,14 @@ const serviceSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    child: {
+        type: Boolean,
+        required: false
+    },
+    baby:{
+        type: Boolean,
+        required: false
+    }
 });
 
 module.exports = mongoose.model('Service', serviceSchema);

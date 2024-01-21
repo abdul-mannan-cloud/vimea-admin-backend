@@ -120,7 +120,6 @@ const addAppointment = async (req, res) => {
             <ul class="parent" >
                 <li>Id-ja: ${newAppointment._id}</li>
                 <li>Shërbimi: ${newAppointment.service}</li>
-                <li>Qmimi i terimint: ${newAppointment.price}€</li>
                 <li>Data e terimint: ${newAppointment.date}</li>
                 <li>Koha e terimint: ${newAppointment.time}</li>
                 
@@ -131,7 +130,6 @@ const addAppointment = async (req, res) => {
             <ul class="parent">
                 <li>Emri: ${newAppointment.parent.firstName}</li>
                 <li>Mbiemri: ${newAppointment.parent.lastName}</li>
-                <li>Numri Kontaktues: ${newAppointment.parent.contactNumber}</li>
                 <li>E-mail: ${newAppointment.parent.email}</li>
             </ul>
         </div>
