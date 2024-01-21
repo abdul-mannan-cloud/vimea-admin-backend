@@ -230,7 +230,6 @@ const getAppointments = async (req, res) => {
 const updateAppointment = async (req, res) => {
     const {id} = req.params
     const appointment = req.body
-    console.log(appointment)
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No Appointment with that id')
     await Appointment.findByIdAndUpdate(id, appointment, {new: true})
     res.json({message: 'Appointment updated successfully'})

@@ -29,6 +29,9 @@ const AppointmentSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    employee: {
+        type: String,
+    },
     parent: {
         firstName: {
             type: String,
