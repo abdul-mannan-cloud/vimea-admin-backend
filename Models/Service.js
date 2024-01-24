@@ -32,6 +32,10 @@ const serviceSchema = new mongoose.Schema({
     baby:{
         type: Boolean,
         required: false
+    },
+    displayGroupAlb:{
+        type: String,
+        required: false
     }
 });
 
