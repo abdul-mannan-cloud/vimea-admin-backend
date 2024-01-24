@@ -219,6 +219,18 @@ const deleteAppointment = async (req, res) => {
     const {id} = req.params
     console.log(id);
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No Appointment with that id')
+    const appointment = await Appointment.findById(id)
+    const user = await User.findOne({email: appointment.parent.email})
+    if(user) {
+        const app = user.appointments.find(app => app.appointmentId === id)
+        const child = await Children.findById(app.child.id)
+        if(child) {
+            child.appointments = child.appointments.filter(app => app.appointmentId !== id)
+            await child.save()
+        }
+        user.appointments = user.appointments.filter(app => app.appointmentId !== id)
+        await user.save()
+    }
     await Appointment.findByIdAndRemove(id)
     res.json({message: 'Appointment deleted successfully'})
 }
