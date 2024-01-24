@@ -73,4 +73,14 @@ const getAllChildren = async (req, res) => {
     }
 };
 
-module.exports = { addClient, editClient, getAllClients, deleteClient,getClient, getAllChildren,getChild };
+const getByMail = async (req, res) => {
+    try {
+        const { mail } = req.params;
+        const client = await User.findOne({email:mail});
+        res.status(200).json(client);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+module.exports = { addClient, editClient, getAllClients, deleteClient,getClient, getAllChildren,getChild,getByMail };

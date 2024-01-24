@@ -49,17 +49,7 @@ const AppointmentSchema = new mongoose.Schema({
             required: true,
         },
     },
-    child: {
-        firstName: {
-            type: String,
-        },
-        lastName: {
-            type: String,
-        },
-        dateOfBirth: {
-            type: String,
-        },
-    },
+    child: Object,
     notShow: {
         type: Boolean,
         default: false,

@@ -6,6 +6,7 @@ const User = require("../Models/User");
 const Children = require("../Models/Children");
 const addAppointment = async (req, res) => {
     const appointment = req.body
+    console.log(appointment)
     const newAppointment = new Appointment(appointment)
     if(appointment.showHistory){
         const user = await User.findOne({email: appointment.parent.email})
@@ -27,13 +28,13 @@ const addAppointment = async (req, res) => {
                 child: {
                     firstName: newAppointment.child.firstName,
                     lastName: newAppointment.child.lastName,
-                    dateOfBirth: newAppointment.child.dateOfBirth,
+                    dateOfBirth: newAppointment.child.birthDate,
                     id: newAppointment.child.id
                 }
             })
             await user.save()
         }
-        const child = await Children.findById(appointment.child.id)
+        const child = await Children.findById(newAppointment.child.id)
         if(child) {
             child.appointments = [...child.appointments, newAppointment._id]
             await child.save()

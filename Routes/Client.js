@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { addClient, editClient, getAllClients, deleteClient,getClient, getAllChildren,getChild } = require('../Controllers/clientController');
+const { addClient, editClient, getAllClients, deleteClient,getClient, getAllChildren,getChild,getByMail } = require('../Controllers/clientController');
 
 router.post('/addclient', addClient);
 router.post('/editclient', editClient);
@@ -9,6 +9,7 @@ router.get('/getclient/:id', getClient);
 router.delete('/deleteclient/:id', deleteClient);
 router.get('/getChild/:id', getChild);
 router.get('/getallchildren', getAllChildren);
+router.get('/getclientmail/:mail', getByMail);
 
 
 module.exports = router;
