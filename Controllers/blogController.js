@@ -42,7 +42,7 @@ const editBlog = async (req, res) => {
             images: imagenames,
             description,
             descriptionENG,
-            mobileIMages:mobileImages
+            mobileImages:mobileImages
         },
         { new: true } 
       );
