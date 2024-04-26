@@ -24,7 +24,7 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  addonImages: [String],
+  addonImages: [Object],
   quantity: {
     type: Number,
     required: true
