@@ -83,4 +83,17 @@ const getByMail = async (req, res) => {
     }
 }
 
-module.exports = { addClient, editClient, getAllClients, deleteClient,getClient, getAllChildren,getChild,getByMail };
+
+const updateChild = async (req,res) => {
+    try {
+        const { id } = req.params;
+        const update = req.body
+        const child = await Children.findByIdAndUpdate(id,update);
+        res.status(200).json(child);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+
+module.exports = { addClient, editClient, getAllClients, deleteClient,getClient, getAllChildren,getChild,getByMail,updateChild };

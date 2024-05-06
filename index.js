@@ -15,6 +15,14 @@ app.use(express.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 
+const DB = "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/vimea?retryWrites=true&w=majority"
+mongoose.connect(DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => console.log("Database connected"))
+    .catch((error) => console.log(error.message));
+
+
 const AWS = require("aws-sdk");
 const fs = require("fs");
 const dotenv = require("dotenv");
@@ -62,12 +70,6 @@ app.use('/appointment', appointmentRoutes);
 const serviceRoutes = require('./Routes/Service');
 app.use('/service', serviceRoutes);
 
-const DB = "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/vimea?retryWrites=true&w=majority"
-mongoose.connect(DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => console.log("Database connected"))
-    .catch((error) => console.log(error.message));
 
 // const secondDb =  "mongodb+srv://vimea:12345@vimea.fu06wla.mongodb.net/"
 // mongoose.connect(secondDb, {
