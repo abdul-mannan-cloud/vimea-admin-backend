@@ -59,26 +59,30 @@ const addProduct = async (req, res) => {
   };
 
 
-  const editProduct = async (req, res) => {
-    try {
-      let ep = req.body;
-      console.log(ep.addonImages)
-      ep.addonImages = ep.addonImages.filter((image) => typeof (image.file?image.file:image) === 'string');
-      console.log(ep.addonImages)
-      const product = await Product.findByIdAndUpdate(ep.id, {...ep,nameENG:ep.productNameENG}, { new: true });
-      if (!product) {
-        return res.status(404).json({ message: 'Product not found' });
-      }
-
-      res.status(200).json({
-        message: 'Product updated successfully',
-        updatedProduct: product,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal server error' });
+ const editProduct = async (req, res) => {
+  try {
+    let ep = req.body;
+    console.log(ep.addonImages)
+    ep.addonImages = ep.addonImages.filter((image) => typeof (image.file?image.file:image) === 'string');
+    console.log(ep.addonImages)
+    const product = await Product.findByIdAndUpdate(ep.id, {
+      ...ep,
+      name: ep.productName,  // Add this line
+      nameENG: ep.productNameENG
+    }, { new: true });
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
     }
-  };
+
+    res.status(200).json({
+      message: 'Product updated successfully',
+      updatedProduct: product,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 const deleteProduct = async (req, res) => {
   const productId = req.params.productId;
