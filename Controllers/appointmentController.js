@@ -4,17 +4,9 @@ const Appointment = require('../Models/Appointment')
 const nodeMailer = require("nodemailer");
 const User = require("../Models/User");
 const Children = require("../Models/Children");
-const { utcToZonedTime, format } = require('date-fns-tz');
-
 const addAppointment = async (req, res) => {
     const appointment = req.body
     const newAppointment = new Appointment(appointment)
-
-    const timeZone = 'Europe/Berlin';
-    const zonedDate = utcToZonedTime(new Date(appointment.date), timeZone);
-    newAppointment.date = format(zonedDate, 'yyyy-MM-dd HH:mm:ssXXX', { timeZone });
-
-
     if(appointment.showHistory){
         const user = await User.findOne({email: appointment.parent.email})
         if(user) {
@@ -49,7 +41,6 @@ const addAppointment = async (req, res) => {
     }
     try {
         await newAppointment.save()
-        const formattedDate = format(zonedDate, 'dd.MM.yyyy HH:mm', { timeZone });
 
         const emailData =  `
             <!DOCTYPE html>
@@ -129,7 +120,7 @@ const addAppointment = async (req, res) => {
             <ul class="parent" >
                 <li>Id-ja: ${newAppointment._id}</li>
                 <li>Shërbimi: ${newAppointment.service}</li>
-                <li>Data e terimint: ${formattedDate}</li>
+                <li>Data e terimint: ${newAppointment.date}</li>
                 <li>Koha e terimint: ${newAppointment.time}</li>
                 
             </ul>
